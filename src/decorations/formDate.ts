@@ -1,5 +1,5 @@
-import { Stream } from 'xstream';
-import { Sources } from '../utilities/component';
+import { Stream } from "xstream";
+import { Sources } from "../utilities/component";
 
 export const prettyDate = (date: Date): string => {
   const year = date.getFullYear();
@@ -10,9 +10,12 @@ export const prettyDate = (date: Date): string => {
   return `${year}年${month}月${day}日 ${hour}:${minutes}`;
 };
 
-export const onClickDateInputFieldAndPreventDefault = <T>(sources: Sources<T>, selector: string): Stream<Event> =>
+export const onClickDateInputFieldAndPreventDefault = <T>(
+  sources: Sources<T>,
+  selector: string
+): Stream<Event> =>
   Stream.merge(
     // To prevent iOS datetime picker from being displayed.
-    sources.DOM.select(selector).events('touchend', { preventDefault: true }),
-    sources.DOM.select(selector).events('click', { preventDefault: true })
+    sources.DOM.select(selector).events("touchend", { preventDefault: true }),
+    sources.DOM.select(selector).events("click", { preventDefault: true })
   );

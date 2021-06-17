@@ -1,5 +1,5 @@
-import { notEmpty } from '../utilities/extentions';
-import { Validator } from './validators';
+import { notEmpty } from "../utilities/extentions";
+import { Validator } from "./validators";
 
 export interface Validation {
   isValid: boolean;
@@ -13,12 +13,24 @@ export interface ValidationError {
 export type ValidationColumn<K> = { [V in keyof K]?: ValidationType };
 
 interface ValidationType {
-  types: ('email' | 'hiragana' | 'name' | 'number' | 'phoneNumber' | 'presence')[];
+  types: (
+    | "email"
+    | "hiragana"
+    | "name"
+    | "number"
+    | "phoneNumber"
+    | "presence"
+  )[];
 }
 
-export const validates = <S>(formState: S, validationColumns: ValidationColumn<S>): Validation => {
+export const validates = <S>(
+  formState: S,
+  validationColumns: ValidationColumn<S>
+): Validation => {
   const errors = Object.entries(validationColumns)
-    .map(([key, value]) => validators(value as ValidationType, key, formState[key as keyof S]))
+    .map(([key, value]) =>
+      validators(value as ValidationType, key, formState[key as keyof S])
+    )
     .reduce((acc, val) => acc.concat(val), []);
 
   const isValid = !errors.length;
@@ -26,7 +38,11 @@ export const validates = <S>(formState: S, validationColumns: ValidationColumn<S
   return { isValid, errors };
 };
 
-const validators = (validationTypes: ValidationType, column: string, value: unknown): ValidationError[] =>
+const validators = (
+  validationTypes: ValidationType,
+  column: string,
+  value: unknown
+): ValidationError[] =>
   Object.values(validationTypes.types)
     .map((type) => Validator[type](column, value))
     .filter(notEmpty);

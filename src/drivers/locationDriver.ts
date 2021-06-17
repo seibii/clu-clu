@@ -1,30 +1,32 @@
-import { Stream } from 'xstream';
+import { Stream } from "xstream";
 
 export interface LocationRedirectRequest {
-  type: 'redirect';
+  type: "redirect";
   redirectUrl: string;
 }
 
 export interface LocationReloadRequest {
-  type: 'reload';
+  type: "reload";
 }
 
 export type LocationRequest = LocationRedirectRequest | LocationReloadRequest;
 
-export const makeLocationDriver = () => (stream: Stream<LocationRequest>): void => {
-  stream
-    .filter((request) => request.type === 'redirect')
-    .addListener({
-      next: (request: LocationRedirectRequest) => {
-        window.location.href = request.redirectUrl;
-      }
-    });
+export const makeLocationDriver =
+  () =>
+  (stream: Stream<LocationRequest>): void => {
+    stream
+      .filter((request) => request.type === "redirect")
+      .addListener({
+        next: (request: LocationRedirectRequest) => {
+          window.location.href = request.redirectUrl;
+        },
+      });
 
-  stream
-    .filter((request) => request.type === 'reload')
-    .addListener({
-      next: () => {
-        window.location.reload();
-      }
-    });
-};
+    stream
+      .filter((request) => request.type === "reload")
+      .addListener({
+        next: () => {
+          window.location.reload();
+        },
+      });
+  };

@@ -1,9 +1,9 @@
-import { VNode } from '@cycle/dom';
-import { Stream } from 'xstream';
-import { SelectableStream } from '../utilities/selectableStream';
+import { VNode } from "@cycle/dom";
+import { Stream } from "xstream";
+import { SelectableStream } from "../utilities/selectableStream";
 
 export interface ModalActionRequest {
-  type: 'props' | 'feedback';
+  type: "props" | "feedback";
   modalName: string;
   value: any;
 }
@@ -13,16 +13,22 @@ export interface modalModelType {
   modalActions$: Stream<ModalActionRequest>;
 }
 
-export const createModalActionProps = <T>(modalName: string, value: T): ModalActionRequest => ({
-  type: 'props',
+export const createModalActionProps = <T>(
+  modalName: string,
+  value: T
+): ModalActionRequest => ({
+  type: "props",
   modalName: modalName,
-  value: value
+  value: value,
 });
 
-export const createModalActionFeedback = <T>(modalName: string, value: T): ModalActionRequest => ({
-  type: 'feedback',
+export const createModalActionFeedback = <T>(
+  modalName: string,
+  value: T
+): ModalActionRequest => ({
+  type: "feedback",
   modalName: modalName,
-  value: value
+  value: value,
 });
 
 export interface ModalActionSource {
@@ -36,22 +42,29 @@ class ModalActionStream extends SelectableStream<unknown> {
   }
 }
 
-export const modalActionDriver = (stream: Stream<ModalActionRequest>): ModalActionSource => {
+export const modalActionDriver = (
+  stream: Stream<ModalActionRequest>
+): ModalActionSource => {
   const source: ModalActionSource = {
     props$: new ModalActionStream(),
-    feedback$: new ModalActionStream()
+    feedback$: new ModalActionStream(),
   };
 
   stream
-    .filter((request) => request.type === 'props')
+    .filter((request) => request.type === "props")
     .addListener({
-      next: (props) => source.props$.shamefullySendNext([props.modalName, props.value])
+      next: (props) =>
+        source.props$.shamefullySendNext([props.modalName, props.value]),
     });
 
   stream
-    .filter((request) => request.type === 'feedback')
+    .filter((request) => request.type === "feedback")
     .addListener({
-      next: (feedback) => source.feedback$.shamefullySendNext([feedback.modalName, feedback.value])
+      next: (feedback) =>
+        source.feedback$.shamefullySendNext([
+          feedback.modalName,
+          feedback.value,
+        ]),
     });
 
   return source;

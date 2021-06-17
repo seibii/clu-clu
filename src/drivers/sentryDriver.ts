@@ -1,38 +1,43 @@
-import * as Sentry from '@sentry/browser';
-import { Stream } from 'xstream';
+import * as Sentry from "@sentry/browser";
+import { Stream } from "xstream";
 import { BrowserOptions } from "@sentry/browser/dist/backend";
 
-export type SentryRequest = SentryCaptureMessageRequest | SentryCaptureExceptionRequest | SentryIdentifyingUserRequest;
+export type SentryRequest =
+  | SentryCaptureMessageRequest
+  | SentryCaptureExceptionRequest
+  | SentryIdentifyingUserRequest;
 
 export interface SentryCaptureExceptionRequest {
-  type: 'exception';
+  type: "exception";
   error: unknown;
 }
 
 export interface SentryCaptureMessageRequest {
-  type: 'message';
-  level: 'Fatal' | 'Error' | 'Warning' | 'Info';
+  type: "message";
+  level: "Fatal" | "Error" | "Warning" | "Info";
   message: string;
 }
 
 export interface SentryIdentifyingUserRequest {
-  type: 'identify';
+  type: "identify";
   id: number;
   username: string;
   email: string;
 }
 
-export interface Props extends BrowserOptions{
-  sendFlg: boolean
+export interface Props extends BrowserOptions {
+  sendFlg: boolean;
 }
 
-export const makeSentryDriver = (props: Props): ((stream: Stream<SentryRequest>) => void) => {
+export const makeSentryDriver = (
+  props: Props
+): ((stream: Stream<SentryRequest>) => void) => {
   if (!props.sendFlg)
     return (stream) => {
       stream.addListener({
         next: (request: SentryRequest) => {
           console.log(request);
-        }
+        },
       });
     };
 
@@ -42,17 +47,24 @@ export const makeSentryDriver = (props: Props): ((stream: Stream<SentryRequest>)
     stream.addListener({
       next: (request: SentryRequest) => {
         switch (request.type) {
-          case 'message':
-            Sentry.captureMessage(request.message, Sentry.Severity[request.level]);
+          case "message":
+            Sentry.captureMessage(
+              request.message,
+              Sentry.Severity[request.level]
+            );
             break;
-          case 'exception':
+          case "exception":
             Sentry.captureException(request.error);
             break;
-          case 'identify':
-            Sentry.setUser({ id: request.id.toString(), email: request.email, username: request.username });
+          case "identify":
+            Sentry.setUser({
+              id: request.id.toString(),
+              email: request.email,
+              username: request.username,
+            });
             break;
         }
-      }
+      },
     });
   };
 };
@@ -71,9 +83,11 @@ const initialize = (props: Props): void => {
   window.onerror = function (message, source, lineno, colno, error) {
     Sentry.captureException(error);
   };
-  window.addEventListener('unhandledrejection', function (event) {
+  window.addEventListener("unhandledrejection", function (event) {
     Sentry.captureMessage(
-      `WARNING: Unhandled promise rejection. Shame on you! Reason: ${JSON.stringify(event.reason)}`,
+      `WARNING: Unhandled promise rejection. Shame on you! Reason: ${JSON.stringify(
+        event.reason
+      )}`,
       Sentry.Severity.Warning
     );
   });

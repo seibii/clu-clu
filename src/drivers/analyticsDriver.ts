@@ -10,24 +10,24 @@ export type AnalyticsRequest =
   | AnalyticsIdentifyRequest;
 
 export interface AnalyticsPageRequest {
-  type: 'page';
+  type: "page";
 }
 
 export interface AnalyticsTrackRequest {
-  type: 'track';
+  type: "track";
   eventName: string;
   properties?: Record<string, unknown>;
 }
 
 export interface AnalyticsTrackLinkRequest {
-  type: 'track_link';
+  type: "track_link";
   link: Element;
   eventName: string;
   properties?: Record<string, unknown>;
 }
 
 export interface AnalyticsIdentifyRequest {
-  type: 'identify';
+  type: "identify";
   userId: number;
 }
 
@@ -50,12 +50,15 @@ const analytics: SegmentAnalytics.AnalyticsJS =
 
 const gaTrackingID: string = process.env.gaTrackingID || "";
 
-export const makeAnalyticsDriver = (apiKey: string, sendFlg: boolean): ((stream: Stream<AnalyticsRequest>) => void) => {
+export const makeAnalyticsDriver = (
+  apiKey: string,
+  sendFlg: boolean
+): ((stream: Stream<AnalyticsRequest>) => void) => {
   initialize(apiKey);
 
   return (stream: Stream<AnalyticsRequest>): AnalyticsSource => {
     const sources: AnalyticsSource = {
-      anonymousId$: Stream.createWithMemory()
+      anonymousId$: Stream.createWithMemory(),
     };
 
     const user = analytics.user() as SegmentUser;
@@ -66,38 +69,43 @@ export const makeAnalyticsDriver = (apiKey: string, sendFlg: boolean): ((stream:
         if (!sendFlg) return;
 
         switch (request.type) {
-          case 'page':
+          case "page":
             analytics.page();
             window.gtag &&
-              window.gtag('event', 'page_view', {
+              window.gtag("event", "page_view", {
                 page_title: window.location.pathname,
                 page_location: window.location.href,
                 page_path: window.location.pathname,
-                send_to: gaTrackingID
+                send_to: gaTrackingID,
               });
             break;
-          case 'track':
+          case "track":
             analytics.track(request.eventName, request.properties);
             window.gtag &&
-              window.gtag('event', request.eventName, {
-                event_category: 'All',
-                event_label: 'event'
+              window.gtag("event", request.eventName, {
+                event_category: "All",
+                event_label: "event",
               });
             break;
-          case 'track_link':
-            analytics.trackLink(request.link, request.eventName, request.properties);
+          case "track_link":
+            analytics.trackLink(
+              request.link,
+              request.eventName,
+              request.properties
+            );
             window.gtag &&
-              window.gtag('event', request.eventName, {
-                event_category: 'All',
-                event_label: 'event'
+              window.gtag("event", request.eventName, {
+                event_category: "All",
+                event_label: "event",
               });
             break;
-          case 'identify':
+          case "identify":
             analytics.identify(`${request.userId}`);
-            window.gtag && window.gtag('config', gaTrackingID, { user_id: request.userId });
+            window.gtag &&
+              window.gtag("config", gaTrackingID, { user_id: request.userId });
             break;
         }
-      }
+      },
       // TODO: error: (error) => {}
     });
 
@@ -108,10 +116,10 @@ export const makeAnalyticsDriver = (apiKey: string, sendFlg: boolean): ((stream:
 const initialize = (apiKey: string) => {
   analytics.use(SegmentIntegration);
   analytics.initialize({
-    'Segment.io': {
+    "Segment.io": {
       apiKey,
       retryQueue: true,
-      addBundleMetadata: true
-    }
+      addBundleMetadata: true,
+    },
   });
 };

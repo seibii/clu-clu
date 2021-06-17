@@ -1,4 +1,4 @@
-import { Stream } from 'xstream';
+import { Stream } from "xstream";
 
 export interface MediaQuery {
   tag: string;
@@ -17,23 +17,32 @@ export interface MediaQuerySource {
 export const makeMediaQueryDriver = (mediaQueries: MediaQuery[]) => {
   return (): MediaQuerySource => {
     const sources: MediaQuerySource = {
-      matches$: Stream.create()
+      matches$: Stream.create(),
     };
 
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener("DOMContentLoaded", () => {
       mediaQueries.forEach((mediaQuery) => {
         const mediaQueryList = window.matchMedia(mediaQuery.expression);
-        sources.matches$.shamefullySendNext({ mediaQuery, matched: mediaQueryList.matches });
+        sources.matches$.shamefullySendNext({
+          mediaQuery,
+          matched: mediaQueryList.matches,
+        });
 
         if (mediaQueryList.addEventListener) {
           // chrome, firefox
-          mediaQueryList.addEventListener('change', (e) => {
-            sources.matches$.shamefullySendNext({ mediaQuery, matched: e.matches });
+          mediaQueryList.addEventListener("change", (e) => {
+            sources.matches$.shamefullySendNext({
+              mediaQuery,
+              matched: e.matches,
+            });
           });
         } else if (mediaQueryList.addListener) {
           // safari
           mediaQueryList.addListener((e) => {
-            sources.matches$.shamefullySendNext({ mediaQuery, matched: e.matches });
+            sources.matches$.shamefullySendNext({
+              mediaQuery,
+              matched: e.matches,
+            });
           });
         }
       });

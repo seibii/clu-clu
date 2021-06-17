@@ -1,4 +1,4 @@
-import { Stream } from 'xstream';
+import { Stream } from "xstream";
 
 export interface ScrollTopRequest {
   position: number;
@@ -16,6 +16,6 @@ export const scrollTopDriver = (stream: Stream<ScrollTopRequest>): void => {
       if (selector) {
         selector.scrollTop = request.position;
       }
-    }
+    },
   });
 };
