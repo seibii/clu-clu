@@ -1,0 +1,13 @@
+src/
+tests/
+.git/
+
+# for WebStorm
+.idea/
+
+# for npm
+node_modules/
+
+.gitignore
+.eslintrc.js
+yarn.lock
