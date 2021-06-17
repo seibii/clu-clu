@@ -5,8 +5,8 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --selectProjects test",
-    "lint": "eslint './{lib,src,test}/**/*.{ts,tsx}'",
-    "lint:fix": "eslint --fix './{lib,src,test}/**/*.{ts,tsx}' && prettier --write './{lib,src,test}/**/*.{ts,tsx}'"
+    "lint": "eslint './{src,test}/**/*.{ts,tsx}'",
+    "lint:fix": "eslint --fix './{src,test}/**/*.{ts,tsx}' && prettier --write './{src,test}/**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.15.0",
@@ -37,5 +37,13 @@
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4",
     "xstream": "^11.7.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "eslint": "^7.28.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.1",
+    "typescript-eslint": "^0.0.1-alpha.0"
   }
 }
