@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "declaration": true,
     "target": "ES5",
+    "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "lib"
+    "noImplicitReturns": true,
+    "outDir": "lib/cjs"
   },
   "include": ["src/**/*"],
 }

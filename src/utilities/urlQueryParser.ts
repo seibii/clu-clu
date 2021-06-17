@@ -1,7 +1,7 @@
 import { Sources } from "./component";
 import { Stream } from "xstream";
-import camelcaseKeys from "camelcase-keys";
 import { Location } from "@cycle/history";
+import * as camelcaseKeys from "camelcase-keys";
 
 export type ParsedQuery = Record<string, unknown>;
 

@@ -60,7 +60,7 @@ export const makeAnalyticsDriver = (
     const sources: AnalyticsSource = {
       anonymousId$: Stream.createWithMemory(),
     };
-
+    
     const user = analytics.user() as SegmentUser;
     sources.anonymousId$.shamefullySendNext(user.anonymousId());
 

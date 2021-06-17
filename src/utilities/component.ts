@@ -7,38 +7,37 @@ import { Stream } from "xstream";
 import {
   AnalyticsRequest,
   AnalyticsSource,
-} from "../infrastructure/drivers/analyticsDriver";
-import { AuthRequest, AuthSource } from "../infrastructure/drivers/authDriver";
-import { CanvasRequest } from "../infrastructure/drivers/canvasDriver";
-import { CrispChatRequest } from "../infrastructure/drivers/crispDriver";
+} from "../drivers/analyticsDriver";
+import { Auth0Request, Auth0Source } from "../drivers/auth0Driver";
+import { CanvasRequest } from "../drivers/canvasDriver";
+import { CrispChatRequest } from "../drivers/crispDriver";
 import {
   FlashRequest,
   FlashSource,
-} from "../infrastructure/drivers/flashDriver";
-import { LocationRequest } from "../infrastructure/drivers/locationDriver";
+} from "../drivers/flashDriver";
+import { LocationRequest } from "../drivers/locationDriver";
 import {
   MediaDevicesSource,
   MediaRequest,
-} from "../infrastructure/drivers/mediaDevicesDriver";
-import { MediaQuerySource } from "../infrastructure/drivers/mediaQueryDriver";
+} from "../drivers/mediaDevicesDriver";
+import { MediaQuerySource } from "../drivers/mediaQueryDriver";
 import {
   ShakenQRRequest,
   ShakenQRSource,
-} from "../infrastructure/drivers/shakenQRDriver";
-import { SentryRequest } from "../infrastructure/drivers/sentryDriver";
-import { FlashState } from "../presentation/components/shared/flash";
+} from "../drivers/shakenQRDriver";
+import { SentryRequest } from "../drivers/sentryDriver";
 import { OuterSi } from "@cycle/isolate";
 import {
   ModalActionRequest,
   ModalActionSource,
-} from "../infrastructure/drivers/modalActionsDriver";
-import { ScrollTopRequest } from "../infrastructure/drivers/scrollTopDriver";
-import { NavigatorShareRequest } from "../infrastructure/drivers/navigatorShareDriver";
+} from "../drivers/modalActionsDriver";
+import { ScrollTopRequest } from "../drivers/scrollTopDriver";
+import { NavigatorShareRequest } from "../drivers/navigatorShareDriver";
 import { TimeSource } from "@cycle/time/lib/cjs/src/time-source";
 import {
   CryptoRequest,
   CryptoSource,
-} from "../infrastructure/drivers/cryptoDriver";
+} from "../drivers/cryptoDriver";
 import { mergeSinks } from "cyclejs-utils";
 
 export type Component<State> = (s: Sources<State>) => Sinks<State>;
@@ -47,7 +46,7 @@ export interface Sources<State> {
   DOM: MainDOMSource;
   HTTP: HTTPSource;
   analytics: AnalyticsSource;
-  auth: AuthSource;
+  auth: Auth0Source;
   crypto: CryptoSource;
   flash: FlashSource;
   mediaDevices: MediaDevicesSource;
@@ -65,7 +64,7 @@ export interface Sinks<State> {
   DOM: Stream<VNode>;
   HTTP: Stream<RequestInput>;
   analytics: Stream<AnalyticsRequest>;
-  auth: Stream<AuthRequest>;
+  auth: Stream<Auth0Request>;
   canvas: Stream<CanvasRequest>;
   crypto: Stream<CryptoRequest>;
   crisp: Stream<CrispChatRequest>;
@@ -107,7 +106,7 @@ export const createSinks = <T>(override: SinksForOverride<T>): Sinks<T> => ({
   storage: override.storage || Stream.never(),
 });
 
-export const mergeSinksAndOverrideDOM = <BaseState, OverrideState>(
+export const mergeSinksAndOverrideDOM = <BaseState, OverrideState, FlashState>(
   base: Sinks<BaseState>,
   override: SinksForOverride<OverrideState>,
   dom: Stream<VNode>,
@@ -131,7 +130,7 @@ export type Model<Actions, State> = (
 ) => optionalModelResult<State>;
 export interface ModelResult<State> {
   analytics$: Stream<AnalyticsRequest>;
-  auth$: Stream<AuthRequest>;
+  auth$: Stream<Auth0Request>;
   canvas$: Stream<CanvasRequest>;
   crisp$: Stream<CrispChatRequest>;
   crypto$: Stream<CryptoRequest>;
