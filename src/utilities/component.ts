@@ -4,27 +4,18 @@ import { Reducer, StateSource } from "@cycle/state";
 import { ResponseCollection, StorageRequest } from "@cycle/storage";
 import { HistoryInput, RouterSource } from "cyclic-router";
 import { Stream } from "xstream";
-import {
-  AnalyticsRequest,
-  AnalyticsSource,
-} from "../drivers/analyticsDriver";
+import { AnalyticsRequest, AnalyticsSource } from "../drivers/analyticsDriver";
 import { Auth0Request, Auth0Source } from "../drivers/auth0Driver";
 import { CanvasRequest } from "../drivers/canvasDriver";
 import { CrispChatRequest } from "../drivers/crispDriver";
-import {
-  FlashRequest,
-  FlashSource,
-} from "../drivers/flashDriver";
+import { FlashRequest, FlashSource } from "../drivers/flashDriver";
 import { LocationRequest } from "../drivers/locationDriver";
 import {
   MediaDevicesSource,
   MediaRequest,
 } from "../drivers/mediaDevicesDriver";
 import { MediaQuerySource } from "../drivers/mediaQueryDriver";
-import {
-  ShakenQRRequest,
-  ShakenQRSource,
-} from "../drivers/shakenQRDriver";
+import { ShakenQRRequest, ShakenQRSource } from "../drivers/shakenQRDriver";
 import { SentryRequest } from "../drivers/sentryDriver";
 import { OuterSi } from "@cycle/isolate";
 import {
@@ -34,10 +25,7 @@ import {
 import { ScrollTopRequest } from "../drivers/scrollTopDriver";
 import { NavigatorShareRequest } from "../drivers/navigatorShareDriver";
 import { TimeSource } from "@cycle/time/lib/cjs/src/time-source";
-import {
-  CryptoRequest,
-  CryptoSource,
-} from "../drivers/cryptoDriver";
+import { CryptoRequest, CryptoSource } from "../drivers/cryptoDriver";
 import { mergeSinks } from "cyclejs-utils";
 
 export type Component<State> = (s: Sources<State>) => Sinks<State>;
