@@ -1,5 +1,8 @@
 import { Stream } from "xstream";
-import { MockMediaDevicesSource } from "./index";
+
+export interface MockMediaDevicesSource {
+  userMedia$: Stream<MediaStream>;
+}
 
 export const mockMediaStream = (): MediaStream => ({
   active: true,
