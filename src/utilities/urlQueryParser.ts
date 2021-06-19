@@ -1,13 +1,15 @@
-import { Sources } from "./component";
 import { Stream } from "xstream";
 import { Location } from "@cycle/history";
 import * as camelcaseKeys from "camelcase-keys";
+import { RouterSource } from "cyclic-router";
 
 export type ParsedQuery = Record<string, unknown>;
 
-export const onChangeQueryParams$ = <T>(
-  sources: Sources<T>
-): Stream<ParsedQuery> =>
+interface Sources {
+  router: RouterSource;
+}
+
+export const onChangeQueryParams$ = (sources: Sources): Stream<ParsedQuery> =>
   sources.router.history$
     .map((history: Location) => history.search)
     .map(parseQuery)

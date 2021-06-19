@@ -1,5 +1,5 @@
 import { Stream } from "xstream";
-import { Sources } from "../utilities/component";
+import { MainDOMSource } from "@cycle/dom";
 
 export const prettyDate = (date: Date): string => {
   const year = date.getFullYear();
@@ -10,8 +10,12 @@ export const prettyDate = (date: Date): string => {
   return `${year}年${month}月${day}日 ${hour}:${minutes}`;
 };
 
-export const onClickDateInputFieldAndPreventDefault = <T>(
-  sources: Sources<T>,
+interface Sources {
+  DOM: MainDOMSource;
+}
+
+export const onClickDateInputFieldAndPreventDefault = (
+  sources: Sources,
   selector: string
 ): Stream<Event> =>
   Stream.merge(
