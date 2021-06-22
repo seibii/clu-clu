@@ -1,0 +1,49 @@
+{
+  "name": "clu-clu",
+  "version": "0.1.0",
+  "main": "lib/cjs/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json",
+    "lint": "eslint './{src,test}/**/*.{ts,tsx}'",
+    "lint:fix": "eslint --fix './{src,test}/**/*.{ts,tsx}' && prettier --write './{src,test}/**/*.{ts,tsx}'"
+  },
+  "dependencies": {
+    "@auth0/auth0-spa-js": "^1.15.0",
+    "@cycle/dom": "^22.3.0",
+    "@cycle/history": "7.1.0 DON'T UPDATE until https://github.com/cyclejs/cyclejs/pull/943 is merged",
+    "@cycle/http": "^15.4.0",
+    "@cycle/isolate": "^5.2.0",
+    "@cycle/run": "^5.2.0",
+    "@cycle/state": "^1.1.0",
+    "@cycle/storage": "^5.1.2",
+    "@cycle/time": "^0.21.0",
+    "@segment/analytics.js-core": "^4.1.11",
+    "@segment/analytics.js-integration-segmentio": "^4.4.5",
+    "@sentry/browser": "^6.5.0",
+    "@sentry/tracing": "^6.3.5",
+    "@sentry/webpack-plugin": "^1.15.1",
+    "@types/gtag.js": "^0.0.5",
+    "camelcase-keys": "^6.2.2",
+    "cyclejs-test-helpers": "git+https://github.com/seibii/cyclejs-test-helpers",
+    "cyclejs-utils": "^4.0.2",
+    "cyclic-router": "^6.0.0",
+    "libphonenumber-js": "^1.9.19",
+    "shaken-qr-reader": "^1.1.4",
+    "snabbdom-looks-like": "^1.0.6",
+    "snakecase-keys": "^4.0.2",
+    "switch-path": "git@github.com:seibii/switch-path.git",
+    "ts-loader": "^9.2.2",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4",
+    "xstream": "^11.7.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "eslint": "^7.28.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.1",
+    "typescript-eslint": "^0.0.1-alpha.0"
+  }
+}
