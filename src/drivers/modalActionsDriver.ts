@@ -1,4 +1,3 @@
-import { VNode } from "@cycle/dom";
 import { Stream } from "xstream";
 import { SelectableStream } from "../utilities/selectableStream";
 
@@ -6,11 +5,6 @@ export interface ModalActionRequest {
   type: "props" | "feedback";
   modalName: string;
   value: any;
-}
-
-export interface modalModelType {
-  modalDOM$: Stream<VNode>;
-  modalActions$: Stream<ModalActionRequest>;
 }
 
 export const createModalActionProps = <T>(

@@ -11,8 +11,12 @@ export interface StatefulSinks<State> {
   state: Stream<Reducer<State>>;
 }
 
+export interface DOMSinks {
+  DOM: Stream<VNode>;
+}
+
 export type Intent<Actions, State> = (
   sources: StatefulSources<State>
 ) => Actions;
-
+export type Model<Actions, Result> = (actions: Actions) => Partial<Result>;
 export type View<S> = (state$: Stream<S>) => Stream<VNode>;
