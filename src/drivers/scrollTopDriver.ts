@@ -5,10 +5,6 @@ export interface ScrollTopRequest {
   selector: string;
 }
 
-export interface ScrollTopModel {
-  scrollTop$?: Stream<ScrollTopRequest>;
-}
-
 export const scrollTopDriver = (stream: Stream<ScrollTopRequest>): void => {
   stream.addListener({
     next: (request) => {
