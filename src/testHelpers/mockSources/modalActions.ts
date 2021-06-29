@@ -1,5 +1,5 @@
 import { Stream } from "xstream";
-import { MockSelectableStream } from "../utilities/selectableStream";
+import { MockSelectableStream } from "../../utilities/selectableStream";
 
 export class MockModalActionsStream extends MockSelectableStream<unknown> {
   select<T>(modalName: string): Stream<T> {

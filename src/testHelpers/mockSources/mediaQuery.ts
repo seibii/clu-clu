@@ -1,5 +1,5 @@
 import { Stream } from "xstream";
-import { MediaQueryMatch } from "../drivers/mediaQueryDriver";
+import { MediaQueryMatch } from "../../drivers/mediaQueryDriver";
 
 export interface MockMediaQuerySource {
   matches$: Stream<MediaQueryMatch>;
