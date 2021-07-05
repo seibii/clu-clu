@@ -1,5 +1,5 @@
 import { Stream } from "xstream";
-import { FlashRequest } from "../drivers/flashDriver";
+import { FlashRequest } from "../../drivers/flashDriver";
 
 export interface MockFlashSource {
   stream$?: Stream<FlashRequest>;

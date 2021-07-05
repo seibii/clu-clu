@@ -1,6 +1,6 @@
 {
   "name": "clu-clu",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "lib/cjs/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -24,6 +24,7 @@
     "@sentry/tracing": "^6.3.5",
     "@sentry/webpack-plugin": "^1.15.1",
     "@types/gtag.js": "^0.0.5",
+    "@types/jest": "^26.0.23",
     "camelcase-keys": "^6.2.2",
     "cyclejs-test-helpers": "git+https://github.com/seibii/cyclejs-test-helpers",
     "cyclejs-utils": "^4.0.2",

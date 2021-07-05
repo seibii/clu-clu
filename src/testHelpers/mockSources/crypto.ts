@@ -1,4 +1,4 @@
-import { MockSelectableStream } from "../utilities/selectableStream";
+import { MockSelectableStream } from "../../utilities/selectableStream";
 
 export interface MockCryptoSource {
   digested$: MockSelectableStream<ArrayBuffer>;
