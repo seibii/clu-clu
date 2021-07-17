@@ -6,8 +6,8 @@ interface Sources {
   DOM: MainDOMSource;
 }
 
-interface AnalyticsTrackSources {
-  link: Element;
+export interface AnalyticsTrackSources {
+  link?: Element;
   eventName: string;
   properties?: Record<string, unknown>;
 }
