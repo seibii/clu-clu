@@ -27,6 +27,7 @@ export interface SentryIdentifyingUserRequest {
 
 export interface Props extends BrowserOptions {
   sendFlg: boolean;
+  errorCatcher?: (error: Error) => boolean; // not send error to sentry if return value is true
 }
 
 export const makeSentryDriver = (
@@ -81,6 +82,7 @@ const initialize = (props: Props): void => {
   Sentry.init(props);
 
   window.onerror = function (message, source, lineno, colno, error) {
+    if (props.errorCatcher && error && props.errorCatcher(error)) return;
     Sentry.captureException(error);
   };
   window.addEventListener("unhandledrejection", function (event) {
