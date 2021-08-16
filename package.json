@@ -40,7 +40,7 @@
     "xstream": "^11.7.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/eslint-plugin": "^4.29.1",
     "@typescript-eslint/parser": "^4.27.0",
     "eslint": "^7.28.0",
     "eslint-plugin-prettier": "^3.4.0",
