@@ -20,7 +20,7 @@
     "@cycle/time": "^0.21.0",
     "@segment/analytics.js-core": "^4.1.11",
     "@segment/analytics.js-integration-segmentio": "^4.4.5",
-    "@sentry/browser": "^6.5.0",
+    "@sentry/browser": "^6.11.0",
     "@sentry/tracing": "^6.3.5",
     "@sentry/webpack-plugin": "^1.17.1",
     "@types/gtag.js": "^0.0.5",
