@@ -2,6 +2,7 @@ import { Stream } from "xstream";
 import { Location } from "@cycle/history";
 import * as camelcaseKeys from "camelcase-keys";
 import { RouterSource } from "cyclic-router";
+import { replaceAll } from "./string";
 
 export type ParsedQuery = Record<string, unknown>;
 
@@ -9,11 +10,14 @@ interface Sources {
   router: RouterSource;
 }
 
-export const onChangeQueryParams$ = (sources: Sources): Stream<ParsedQuery> =>
+export const onChangeQueryParams$ = (
+  sources: Sources,
+  options?: camelcaseKeys.Options
+): Stream<ParsedQuery> =>
   sources.router.history$
     .map((history: Location) => history.search)
     .map(parseQuery)
-    .map(camelcaseKeys);
+    .map((p: ParsedQuery) => camelcaseKeys(p, options));
 
 export const parseQuery = (query: string): ParsedQuery =>
   query
@@ -26,12 +30,12 @@ export const parseQuery = (query: string): ParsedQuery =>
 
 export const parseDate = (source: string | undefined): Date | undefined => {
   if (!source) return undefined;
-  const date = new Date(source);
+  const date = new Date(source.replace(" ", "+"));
   return date.toString() === "Invalid date" ? undefined : date;
 };
 
 const decodeURI = (source: string): string =>
-  decodeURIComponent(source.replace("+", " "));
+  decodeURIComponent(replaceAll(source, "+", " "));
 
 const makeValue = (
   key: string,
@@ -46,7 +50,7 @@ const makeValue = (
       ...parsed,
       [headKey]: makeValue(
         matchedKey[2],
-        value,
+        decodeURI(value),
         (parsed[headKey] as Record<string, unknown>) || {}
       ),
     };
