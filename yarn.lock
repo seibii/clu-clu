@@ -302,10 +302,10 @@
     spark-md5 "^2.0.2"
     uuid "^3.4.0"
 
-"@segment/analytics.js-integration-segmentio@^4.4.5":
-  version "4.4.6"
-  resolved "https://registry.yarnpkg.com/@segment/analytics.js-integration-segmentio/-/analytics.js-integration-segmentio-4.4.6.tgz#1856a2229be31dc314c5366293cd5925959ed0a8"
-  integrity sha512-cc19C2T5bzHVhPTgl5in4P/+bal5PAVAPWkm4+EWyJaLqVzuEn90VZP82IJ4OpNwApbPyDQ8Pikhz9DO7sC7RQ==
+"@segment/analytics.js-integration-segmentio@^4.4.7":
+  version "4.4.7"
+  resolved "https://registry.yarnpkg.com/@segment/analytics.js-integration-segmentio/-/analytics.js-integration-segmentio-4.4.7.tgz#388e20f32919452ca861686bfe0c2eb23fb46bae"
+  integrity sha512-71It3J8EH4NEFMBMnju3XRgqy5MTVPB/EnIEWpXB16dLfXn1WvOB1uFw0EiomI/VkWo5JYvvVLuZr4wvh+lxMg==
   dependencies:
     "@ndhoule/extend" "^2.0.0"
     "@ndhoule/keys" "^2.0.0"
