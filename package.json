@@ -23,7 +23,7 @@
     "@sentry/browser": "^6.11.0",
     "@sentry/tracing": "^6.3.5",
     "@sentry/webpack-plugin": "^1.17.1",
-    "@types/gtag.js": "^0.0.5",
+    "@types/gtag.js": "^0.0.7",
     "@types/jest": "^26.0.23",
     "camelcase-keys": "^6.2.2",
     "cyclejs-test-helpers": "git+https://github.com/seibii/cyclejs-test-helpers",
