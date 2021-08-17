@@ -90,6 +90,7 @@ export const makeAuth0Driver = (
       )
       .addListener({
         next: (request) => {
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
           client.logout({
             returnTo: request.returnUri
               ? `${props.redirectUrl}${request.returnUri}`
