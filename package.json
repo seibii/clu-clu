@@ -24,7 +24,7 @@
     "@sentry/tracing": "^6.11.0",
     "@sentry/webpack-plugin": "^1.17.1",
     "@types/gtag.js": "^0.0.7",
-    "@types/jest": "^26.0.23",
+    "@types/jest": "^27.0.1",
     "camelcase-keys": "^7.0.0",
     "cyclejs-test-helpers": "git+https://github.com/seibii/cyclejs-test-helpers",
     "cyclejs-utils": "^4.0.2",
