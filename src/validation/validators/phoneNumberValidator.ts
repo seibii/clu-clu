@@ -3,7 +3,7 @@ import { parsePhoneNumber } from "libphonenumber-js";
 const errorMessage = { message: "電話番号が不正です。" };
 
 export const phoneNumberValidator = (
-  column: string,
+  displayName: string,
   value: unknown
 ): { message: string } | null => {
   if (!value) return null;

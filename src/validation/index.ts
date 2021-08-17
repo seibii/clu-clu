@@ -21,6 +21,7 @@ interface ValidationType {
     | "phoneNumber"
     | "presence"
   )[];
+  displayName?: string;
 }
 
 export const validates = <S>(
@@ -44,5 +45,5 @@ const validators = (
   value: unknown
 ): ValidationError[] =>
   Object.values(validationTypes.types)
-    .map((type) => Validator[type](column, value))
+    .map((type) => Validator[type](column, value, validationTypes.displayName))
     .filter(notEmpty);

@@ -1,5 +1,5 @@
 export const emailValidator = (
-  column: string,
+  displayName: string,
   value: unknown
 ): { message: string } | null => {
   if (!value) return null;
@@ -10,7 +10,7 @@ export const emailValidator = (
       value
     )
   ) {
-    return { message: "メールアドレスが正しくありません。" };
+    return { message: `${displayName}が正しくありません。` };
   }
   return null;
 };
