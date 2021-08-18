@@ -1,7 +1,13 @@
 import { Stream } from "xstream";
 import { VNode } from "@cycle/dom";
 
-export interface FlashRequest {
+export type FlashRequest = FlashCleanRequest | FlashMessageRequest;
+
+export interface FlashCleanRequest {
+  type: "clean";
+}
+
+export interface FlashMessageRequest {
   type: "success" | "error";
   message: string | VNode;
   iconSrc?: string;

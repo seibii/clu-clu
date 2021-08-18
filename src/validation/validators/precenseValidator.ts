@@ -1,9 +1,9 @@
 export const presenceValidator = (
-  column: string,
+  displayName: string,
   value: unknown
 ): { message: string } | null => {
   if (!value) {
-    return { message: `${column}を入力してください。` };
+    return { message: `${displayName}を入力してください。` };
   }
   return null;
 };
