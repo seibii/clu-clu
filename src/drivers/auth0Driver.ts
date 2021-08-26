@@ -64,7 +64,7 @@ export const makeAuth0Driver = (
       login$: Stream.create(),
       logout$: Stream.create(),
       requiredLogin$: Stream.createWithMemory(),
-      appState$: Stream.createWithMemory()
+      appState$: Stream.create()
     };
 
     stream
