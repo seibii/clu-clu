@@ -5,7 +5,7 @@ export interface MockAuthResponses {
   login$?: Stream<null>;
   logout$?: Stream<null>;
   requiredLogin$?: Stream<null>;
-  appState$: Stream<any>;
+  appState$?: Stream<any>;
 }
 
 export const mockAuthSource = (
