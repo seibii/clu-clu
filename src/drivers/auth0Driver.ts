@@ -21,16 +21,22 @@ export interface Auth0LoginRequest {
   connection: string;
 }
 
+export interface Auth0CallbackRequest {
+  type: "callback";
+}
+
 export type Auth0Request =
   | Auth0TokenRequest
   | Auth0LoginRequest
-  | Auth0LogoutRequest;
+  | Auth0LogoutRequest
+  | Auth0CallbackRequest;
 
 export interface Auth0Source {
   token$: Stream<string>;
   login$: Stream<null>;
   logout$: Stream<null>;
   requiredLogin$: Stream<null>;
+  appState$: Stream<any>;
 }
 
 export interface Props {
@@ -58,6 +64,7 @@ export const makeAuth0Driver = (
       login$: Stream.create(),
       logout$: Stream.create(),
       requiredLogin$: Stream.createWithMemory(),
+      appState$: Stream.create()
     };
 
     stream
@@ -100,6 +107,15 @@ export const makeAuth0Driver = (
         },
         // TODO: error: () => source.requiredLogin$.shamefullySendNext(null)
       });
+
+    stream
+      .filter((reauest) => reauest.type === "callback")
+      .map(() => Stream.fromPromise((client.handleRedirectCallback())))
+      .flatten()
+      .addListener({
+        next: (callback) => source.appState$.shamefullySendNext(callback.appState),
+        error: () => source.requiredLogin$.shamefullySendNext(null)
+      })
 
     return source;
   };
