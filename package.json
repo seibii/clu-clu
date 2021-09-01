@@ -36,7 +36,7 @@
     "switch-path": "git@github.com:seibii/switch-path.git",
     "ts-loader": "^9.2.5",
     "ts-node": "^9.1.1",
-    "typescript": "^4.3.5",
+    "typescript": "^4.4.2",
     "xstream": "^11.7.0"
   },
   "devDependencies": {

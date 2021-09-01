@@ -15,5 +15,5 @@ export const mockAuthSource = (
   login$: responses.login$ || Stream.never(),
   logout$: responses.logout$ || Stream.never(),
   requiredLogin$: responses.requiredLogin$ || Stream.never(),
-  appState$: responses.appState$ || Stream.never()
+  appState$: responses.appState$ || Stream.never(),
 });

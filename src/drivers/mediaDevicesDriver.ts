@@ -40,8 +40,7 @@ export const makeMediaDevicesDriver = (
     .flatten()
     .addListener({
       next: (mediaStream) => source.userMedia$.shamefullySendNext(mediaStream),
-      error: (err: MediaStreamError) =>
-        console.log(`${err.name}:${err.message || ""}`),
+      error: (err: Error) => console.log(`${err.name}:${err.message || ""}`),
     });
 
   stream

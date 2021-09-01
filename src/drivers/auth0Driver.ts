@@ -64,7 +64,7 @@ export const makeAuth0Driver = (
       login$: Stream.create(),
       logout$: Stream.create(),
       requiredLogin$: Stream.createWithMemory(),
-      appState$: Stream.create()
+      appState$: Stream.create(),
     };
 
     stream
@@ -110,12 +110,13 @@ export const makeAuth0Driver = (
 
     stream
       .filter((reauest) => reauest.type === "callback")
-      .map(() => Stream.fromPromise((client.handleRedirectCallback())))
+      .map(() => Stream.fromPromise(client.handleRedirectCallback()))
       .flatten()
       .addListener({
-        next: (callback) => source.appState$.shamefullySendNext(callback.appState),
-        error: () => source.requiredLogin$.shamefullySendNext(null)
-      })
+        next: (callback) =>
+          source.appState$.shamefullySendNext(callback.appState),
+        error: () => source.requiredLogin$.shamefullySendNext(null),
+      });
 
     return source;
   };
