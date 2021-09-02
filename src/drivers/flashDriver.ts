@@ -13,6 +13,7 @@ export interface FlashMessageRequest {
   iconSrc?: string;
   linkTo?: string;
   pathName?: string;
+  designType?: "plane" | "popup";
 }
 
 export interface FlashSource {
