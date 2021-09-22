@@ -88,6 +88,15 @@ export const pageErrorHandler = (error: unknown): Error => {
   }
 };
 
+export const onRequestErrorIntent = (sources: Sources<unknown>, ...categories: string[]): Stream<Error> => {
+  const errorStreams = categories.map((category) =>
+    sources.HTTP.select(category)
+      .map((response) => response.replaceError((error) => Stream.of(error)))
+      .flatten()
+  );
+  return pageError$(Stream.merge(...errorStreams));
+};
+
 const mapErrorToFlashRequest =
   (defaultMessage?: string) =>
   (error: unknown): FlashRequest => {
