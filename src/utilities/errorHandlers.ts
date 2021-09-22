@@ -1,4 +1,4 @@
-import { Response } from "@cycle/http";
+import { Response, HTTPSource } from "@cycle/http";
 import { Stream } from "xstream";
 import { FlashRequest } from "../drivers/flashDriver";
 import { isError } from "./extentions";
@@ -12,6 +12,10 @@ export interface Error {
     | "unknownError";
   title: string;
   message: string;
+}
+
+interface HttpSource {
+  HTTP: HTTPSource
 }
 
 export const errorsFlash$ = (
@@ -86,6 +90,15 @@ export const pageErrorHandler = (error: unknown): Error => {
       message: "時間をおいて再度お試しください。",
     };
   }
+};
+
+export const onRequestErrorIntent = (sources: HttpSource, ...categories: string[]): Stream<Error> => {
+  const errorStreams = categories.map((category) =>
+    sources.HTTP.select(category)
+      .map((response) => response.replaceError((error) => Stream.of(error)))
+      .flatten()
+  );
+  return pageError$(Stream.merge(...errorStreams));
 };
 
 const mapErrorToFlashRequest =
