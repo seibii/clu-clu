@@ -2,14 +2,14 @@
 # yarn lockfile v1
 
 
-"@auth0/auth0-spa-js@^1.17.0":
-  version "1.17.0"
-  resolved "https://registry.yarnpkg.com/@auth0/auth0-spa-js/-/auth0-spa-js-1.17.0.tgz#e48057471a2a639b80c96969072f1eb9ac32dd5e"
-  integrity sha512-UqfulO/ycA9Lt3F7FKuwv3Xo+g+2bOs9kABPAz8uNvCjiwM891eRYARUKn8lLgeK30TNt2ot2DtpNHI3BVP0Jg==
+"@auth0/auth0-spa-js@^1.18.0":
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/@auth0/auth0-spa-js/-/auth0-spa-js-1.18.0.tgz#810d94e26fb47ec14115b9a4cd3f0700eee4fee7"
+  integrity sha512-Z8ZIzrZJKBHa3yFY/vRJYqg9CbLPwb2sRnouBdfPj8Pas08fwig63mfJKaTusIJC3gQ8xCIwfw4QFo83wpmFkg==
   dependencies:
     abortcontroller-polyfill "^1.7.3"
     browser-tabs-lock "^1.2.14"
-    core-js "^3.15.2"
+    core-js "^3.16.3"
     es-cookie "^1.3.2"
     fast-text-encoding "^1.0.3"
     promise-polyfill "^8.2.0"
@@ -1061,10 +1061,10 @@ cookiejar@^2.1.0:
   resolved "https://registry.yarnpkg.com/cookiejar/-/cookiejar-2.1.2.tgz#dd8a235530752f988f9a0844f3fc589e3111125c"
   integrity sha512-Mw+adcfzPxcPeI+0WlvRrr/3lGVO0bD75SxX6811cxSh1Wbxx7xZBGK1eVtDf6si8rg2lhnUjsVLMFMfbRIuwA==
 
-core-js@^3.15.2:
-  version "3.16.2"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.16.2.tgz#3f485822889c7fc48ef463e35be5cc2a4a01a1f4"
-  integrity sha512-P0KPukO6OjMpjBtHSceAZEWlDD1M2Cpzpg6dBbrjFqFhBHe/BwhxaP820xKOjRn/lZRQirrCusIpLS/n2sgXLQ==
+core-js@^3.16.3:
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.18.0.tgz#9af3f4a6df9ba3428a3fb1b171f1503b3f40cc49"
+  integrity sha512-WJeQqq6jOYgVgg4NrXKL0KLQhi0CT4ZOCvFL+3CQ5o7I6J8HkT5wd53EadMfqTDp1so/MT1J+w2ujhWcCJtN7w==
 
 core-util-is@~1.0.0:
   version "1.0.2"
