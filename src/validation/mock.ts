@@ -11,6 +11,7 @@ export function createMockValidation(isValid: boolean): Validation {
         errors: [
           {
             message: "error message",
+            column: "name"
           },
         ],
       };
