@@ -8,6 +8,12 @@ export const dictionary = (column: string): string => {
       return "氏名";
     case "kanaName":
       return "氏名(かな)";
+    case "carMakeName":
+      return "カーメーカー";
+    case "carModelName":
+      return "車種";
+    case "carModelNumber":
+      return "型式";
     default:
       return column;
   }
