@@ -8,6 +8,7 @@ export interface Validation {
 
 export interface ValidationError {
   message: string;
+  column?: string;
 }
 
 export type ValidationColumn<K> = { [V in keyof K]?: ValidationType };
@@ -45,5 +46,8 @@ const validators = (
   value: unknown
 ): ValidationError[] =>
   Object.values(validationTypes.types)
-    .map((type) => Validator[type](column, value, validationTypes.displayName))
+    .map((type) => ({
+      ...Validator[type](column, value, validationTypes.displayName),
+      column: column
+    }))
     .filter(notEmpty);
