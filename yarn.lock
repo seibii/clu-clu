@@ -1752,10 +1752,10 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-libphonenumber-js@^1.9.34:
-  version "1.9.34"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.34.tgz#ddddc778a9b2f53c70500fcf10c9483596e3574f"
-  integrity sha512-gHTNU9xTtVgSp30IDX/57W4pETMXDIYXFfwEOJVXiYosiY7Hc7ogJwlBjOqlCcU04X0aA8DT57hdwUC1sJBJnA==
+libphonenumber-js@^1.9.37:
+  version "1.9.37"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.9.37.tgz#944f59a3618a8f85d9b619767a0b6fb87523f285"
+  integrity sha512-RnUR4XwiVhMLnT7uFSdnmLeprspquuDtaShAgKTA+g/ms9/S4hQU3/QpFdh3iXPHtxD52QscXLm2W2+QBmvYAg==
 
 load-iframe@^1.0.0:
   version "1.0.0"
