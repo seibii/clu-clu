@@ -46,8 +46,6 @@ const validators = (
   value: unknown
 ): ValidationError[] =>
   Object.values(validationTypes.types)
-    .map((type) => ({
-      ...Validator[type](column, value, validationTypes.displayName),
-      column: column
-    }))
-    .filter(notEmpty);
+    .map((type) => Validator[type](column, value, validationTypes.displayName))
+    .filter(notEmpty)
+    .map((validator) => ({ ...validator, column: column }));
