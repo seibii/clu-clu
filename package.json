@@ -22,7 +22,7 @@
     "@segment/analytics.js-integration-segmentio": "^4.4.7",
     "@sentry/browser": "^6.13.3",
     "@sentry/tracing": "^6.13.3",
-    "@sentry/webpack-plugin": "^1.17.2",
+    "@sentry/webpack-plugin": "^1.17.3",
     "@types/gtag.js": "^0.0.7",
     "@types/jest": "^27.0.2",
     "camelcase-keys": "^7.0.1",
