@@ -15,7 +15,7 @@ export interface Error {
 }
 
 interface HttpSource {
-  HTTP: HTTPSource
+  HTTP: HTTPSource;
 }
 
 export const errorsFlash$ = (
@@ -92,7 +92,10 @@ export const pageErrorHandler = (error: unknown): Error => {
   }
 };
 
-export const onRequestErrorIntent = (sources: HttpSource, ...categories: string[]): Stream<Error> => {
+export const onRequestErrorIntent = (
+  sources: HttpSource,
+  ...categories: string[]
+): Stream<Error> => {
   const errorStreams = categories.map((category) =>
     sources.HTTP.select(category)
       .map((response) => response.replaceError((error) => Stream.of(error)))

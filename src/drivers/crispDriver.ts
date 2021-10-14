@@ -3,7 +3,8 @@ import { Stream } from "xstream";
 export type CrispChatRequest =
   | CrispChatRequestSetUser
   | CrispChatRequestResetUser
-  | CrispChatRequestOpenChat;
+  | CrispChatRequestOpenChat
+  | CrispChatRequestSendMessage;
 
 export interface CrispChatRequestSetUser {
   type: "set_user";
@@ -17,6 +18,14 @@ export interface CrispChatRequestResetUser {
 export interface CrispChatRequestOpenChat {
   type: "open_chat";
 }
+
+export interface CrispChatRequestSendMessage {
+  type: "send_message";
+  kind: CrispMessageKind;
+  message: string;
+}
+
+export type CrispMessageKind = "text";
 
 interface UserProfile {
   uid: string;
@@ -58,6 +67,9 @@ export const makeCrispChatDriver = (
           case "open_chat":
             openChat();
             break;
+          case "send_message":
+            sendMessage(request.kind, request.message);
+            break;
         }
       },
     });
@@ -98,4 +110,8 @@ const resetUser = () => {
 
 const openChat = () => {
   window.$crisp.push(["do", "chat:open"]);
+};
+
+const sendMessage = (kind: CrispMessageKind, message: string) => {
+  window.$crisp.push(["do", "message:send", [kind, message]]);
 };
