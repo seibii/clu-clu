@@ -1,7 +1,10 @@
-import * as analyticsCore from "@segment/analytics.js-core";
-import * as SegmentIntegration from "@segment/analytics.js-integration-segmentio";
 import { Stream } from "xstream";
-import { SegmentAnalytics } from "@segment/analytics.js-core";
+import {
+  Analytics,
+  AnalyticsBrowser,
+  JSONValue,
+} from "@segment/analytics-next/dist/umd";
+import { notEmpty } from "../utilities/extentions";
 
 export type AnalyticsRequest =
   | AnalyticsPageRequest
@@ -23,7 +26,7 @@ export interface AnalyticsTrackLinkRequest {
   type: "track_link";
   link: Element;
   eventName: string;
-  properties?: Record<string, unknown>;
+  properties?: Record<string, JSONValue>;
 }
 
 export interface AnalyticsIdentifyRequest {
@@ -41,35 +44,33 @@ declare global {
   }
 }
 
-interface SegmentUser {
-  anonymousId: () => string;
-}
-
-const analytics: SegmentAnalytics.AnalyticsJS =
-  analyticsCore as unknown as SegmentAnalytics.AnalyticsJS;
-
 export const makeAnalyticsDriver = (
   apiKey: string,
   sendFlg: boolean,
   gaTrackingID?: string
 ): ((stream: Stream<AnalyticsRequest>) => void) => {
-  initialize(apiKey);
+  const initialized$ = initialize(apiKey);
 
   return (stream: Stream<AnalyticsRequest>): AnalyticsSource => {
     const sources: AnalyticsSource = {
       anonymousId$: Stream.createWithMemory(),
     };
 
-    const user = analytics.user() as SegmentUser;
-    sources.anonymousId$.shamefullySendNext(user.anonymousId());
+    initialized$
+      .map((analytics) => analytics.user().anonymousId())
+      .filter(notEmpty)
+      .addListener({
+        next: (anonymousId) =>
+          sources.anonymousId$.shamefullySendNext(anonymousId),
+      });
 
-    stream.addListener({
-      next: (request) => {
+    Stream.combine(stream, initialized$).addListener({
+      next: ([request, analytics]) => {
         if (!sendFlg) return;
 
         switch (request.type) {
           case "page":
-            analytics.page();
+            void analytics.page();
             window.gtag &&
               gaTrackingID &&
               window.gtag("event", "page_view", {
@@ -80,7 +81,7 @@ export const makeAnalyticsDriver = (
               });
             break;
           case "track":
-            analytics.track(request.eventName, request.properties);
+            void analytics.track(request.eventName, request.properties);
             window.gtag &&
               gaTrackingID &&
               window.gtag("event", request.eventName, {
@@ -89,7 +90,7 @@ export const makeAnalyticsDriver = (
               });
             break;
           case "track_link":
-            analytics.trackLink(
+            void analytics.trackLink(
               request.link,
               request.eventName,
               request.properties
@@ -102,7 +103,7 @@ export const makeAnalyticsDriver = (
               });
             break;
           case "identify":
-            analytics.identify(`${request.userId}`);
+            void analytics.identify(`${request.userId}`);
             window.gtag &&
               gaTrackingID &&
               window.gtag("config", gaTrackingID, { user_id: request.userId });
@@ -116,13 +117,7 @@ export const makeAnalyticsDriver = (
   };
 };
 
-const initialize = (apiKey: string) => {
-  analytics.use(SegmentIntegration);
-  analytics.initialize({
-    "Segment.io": {
-      apiKey,
-      retryQueue: true,
-      addBundleMetadata: true,
-    },
-  });
-};
+const initialize = (apiKey: string): Stream<Analytics> =>
+  Stream.fromPromise(
+    AnalyticsBrowser.load({ writeKey: apiKey }, { retryQueue: true })
+  ).map(([analytics, _]) => analytics);
