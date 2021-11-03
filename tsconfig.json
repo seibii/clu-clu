@@ -8,5 +8,5 @@
     "noImplicitReturns": true,
     "outDir": "lib/cjs"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*"]
 }
