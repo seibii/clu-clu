@@ -11,13 +11,22 @@ export interface LocationReloadRequest {
 
 export type LocationRequest = LocationRedirectRequest | LocationReloadRequest;
 
+export interface LocationSource {
+  href$: Stream<string>;
+}
+
 export const makeLocationDriver =
   () =>
-  (stream: Stream<LocationRequest>): void => {
+  (stream: Stream<LocationRequest>): LocationSource => {
+    const source: LocationSource = {
+      href$: Stream.create()
+    };
+
     stream
       .filter((request) => request.type === "redirect")
       .addListener({
         next: (request: LocationRedirectRequest) => {
+          source.href$.shamefullySendNext(request.redirectUrl);
           window.location.href = request.redirectUrl;
         },
       });
@@ -29,4 +38,6 @@ export const makeLocationDriver =
           window.location.reload();
         },
       });
+
+    return source;
   };
