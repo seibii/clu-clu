@@ -47,7 +47,7 @@ declare global {
 export const makeAnalyticsDriver = (
   apiKey: string,
   sendFlg: boolean,
-  gaTrackingID?: string
+  gaTrackingIDs?: string[]
 ): ((stream: Stream<AnalyticsRequest>) => void) => {
   const initialized$ = initialize(apiKey);
 
@@ -72,18 +72,15 @@ export const makeAnalyticsDriver = (
           case "page":
             void analytics.page();
             window.gtag &&
-              gaTrackingID &&
               window.gtag("event", "page_view", {
                 page_title: window.location.pathname,
                 page_location: window.location.href,
                 page_path: window.location.pathname,
-                send_to: gaTrackingID,
               });
             break;
           case "track":
             void analytics.track(request.eventName, request.properties);
             window.gtag &&
-              gaTrackingID &&
               window.gtag("event", request.eventName, {
                 event_category: "All",
                 event_label: "event",
@@ -96,7 +93,6 @@ export const makeAnalyticsDriver = (
               request.properties
             );
             window.gtag &&
-              gaTrackingID &&
               window.gtag("event", request.eventName, {
                 event_category: "All",
                 event_label: "event",
@@ -105,8 +101,9 @@ export const makeAnalyticsDriver = (
           case "identify":
             void analytics.identify(`${request.userId}`);
             window.gtag &&
-              gaTrackingID &&
-              window.gtag("config", gaTrackingID, { user_id: request.userId });
+              gaTrackingIDs?.forEach((trackingId) =>
+                window.gtag("config", trackingId, { user_id: request.userId })
+              );
             break;
         }
       },
