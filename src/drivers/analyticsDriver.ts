@@ -41,6 +41,7 @@ export interface AnalyticsSource {
 declare global {
   interface Window {
     gtag?: Gtag.Gtag;
+    clarity?: { (action: string, key: string, value: string): void };
   }
 }
 
@@ -60,8 +61,11 @@ export const makeAnalyticsDriver = (
       .map((analytics) => analytics.user().anonymousId())
       .filter(notEmpty)
       .addListener({
-        next: (anonymousId) =>
-          sources.anonymousId$.shamefullySendNext(anonymousId),
+        next: (anonymousId) => {
+          sources.anonymousId$.shamefullySendNext(anonymousId);
+          if (!window.clarity) return;
+          window.clarity("set", "segmentAnonymousId", anonymousId);
+        },
       });
 
     Stream.combine(stream, initialized$).addListener({
