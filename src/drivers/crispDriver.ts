@@ -4,7 +4,9 @@ export type CrispChatRequest =
   | CrispChatRequestSetUser
   | CrispChatRequestResetUser
   | CrispChatRequestOpenChat
-  | CrispChatRequestSendMessage;
+  | CrispChatRequestSendMessage
+  | CrispChatRequestShowChatbox
+  | CrispChatRequestHideChatbox;
 
 export interface CrispChatRequestSetUser {
   type: "set_user";
@@ -17,6 +19,14 @@ export interface CrispChatRequestResetUser {
 
 export interface CrispChatRequestOpenChat {
   type: "open_chat";
+}
+
+export interface CrispChatRequestShowChatbox {
+  type: "show_chatbox";
+}
+
+export interface CrispChatRequestHideChatbox {
+  type: "hide_chatbox";
 }
 
 export interface CrispChatRequestSendMessage {
@@ -65,10 +75,16 @@ export const makeCrispChatDriver = (
             resetUser();
             break;
           case "open_chat":
-            openChat();
+            window.$crisp.push(["do", "chat:open"]);
             break;
+          case "show_chatbox":
+            window.$crisp.push(["do", "chat:show"]);
+            break
+          case "hide_chatbox":
+            window.$crisp.push(["do", "chat:hide"]);
+            break
           case "send_message":
-            sendMessage(request.kind, request.message);
+            window.$crisp.push(["do", "message:send", [request.kind, request.message]]);
             break;
         }
       },
@@ -106,12 +122,4 @@ const setUser = (user: UserProfile) => {
 const resetUser = () => {
   window.CRISP_TOKEN_ID = undefined;
   window.$crisp.push(["do", "session:reset"]);
-};
-
-const openChat = () => {
-  window.$crisp.push(["do", "chat:open"]);
-};
-
-const sendMessage = (kind: CrispMessageKind, message: string) => {
-  window.$crisp.push(["do", "message:send", [kind, message]]);
 };
