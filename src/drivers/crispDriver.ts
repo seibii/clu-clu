@@ -79,12 +79,16 @@ export const makeCrispChatDriver = (
             break;
           case "show_chatbox":
             window.$crisp.push(["do", "chat:show"]);
-            break
+            break;
           case "hide_chatbox":
             window.$crisp.push(["do", "chat:hide"]);
-            break
+            break;
           case "send_message":
-            window.$crisp.push(["do", "message:send", [request.kind, request.message]]);
+            window.$crisp.push([
+              "do",
+              "message:send",
+              [request.kind, request.message],
+            ]);
             break;
         }
       },
