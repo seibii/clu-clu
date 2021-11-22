@@ -2492,7 +2492,7 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-"switch-path@git+https://github.com/seibii/switch-path.git":
+"switch-path@git+https://github.com/seibii/switch-path.git#44fca145009cb2f6bee4192f95927bc6f67da61b":
   version "1.2.0"
   resolved "git+https://github.com/seibii/switch-path.git#44fca145009cb2f6bee4192f95927bc6f67da61b"
 

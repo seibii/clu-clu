@@ -19,7 +19,7 @@ export const makeLocationDriver =
   () =>
   (stream: Stream<LocationRequest>): LocationSource => {
     const source: LocationSource = {
-      href$: Stream.create()
+      href$: Stream.create(),
     };
 
     stream

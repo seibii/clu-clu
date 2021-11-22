@@ -1,7 +1,7 @@
 import { Stream } from "xstream";
 
 export interface PageEvent {
-  type: "focus"| "blur" | "exit";
+  type: "focus" | "blur" | "exit";
 }
 
 export interface PageEventSource {
@@ -10,20 +10,20 @@ export interface PageEventSource {
 
 export const makePageEventDriver = (): PageEventSource => {
   const sources: PageEventSource = {
-    event$: Stream.create()
+    event$: Stream.create(),
   };
 
   window.addEventListener("focus", () => {
-    sources.event$.shamefullySendNext({ type: "focus" })
+    sources.event$.shamefullySendNext({ type: "focus" });
   });
 
   window.addEventListener("blur", () => {
-    sources.event$.shamefullySendNext({ type: "blur" })
+    sources.event$.shamefullySendNext({ type: "blur" });
   });
 
-  window.addEventListener('beforeunload', () => {
-    sources.event$.shamefullySendNext({ type: "exit" })
+  window.addEventListener("beforeunload", () => {
+    sources.event$.shamefullySendNext({ type: "exit" });
   });
 
   return sources;
-}
+};
