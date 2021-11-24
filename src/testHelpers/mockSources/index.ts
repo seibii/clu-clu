@@ -9,3 +9,5 @@ export * from "./modalActions";
 export * from "./router";
 export * from "./shaken";
 export * from "./storage";
+export * from "./location";
+export * from "./pageEvent";
