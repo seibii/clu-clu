@@ -200,10 +200,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@segment/analytics-next@^1.31.0":
-  version "1.31.0"
-  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.31.0.tgz#41e3c84b067e930993680814f1694a6de6afcc1a"
-  integrity sha512-uwa3ZnjxIT9pVGfcYraXqLjXL6XWezcGSpCfoEez079Fe/i6aW9WQ8IFnwq8KhHYZozaDPurJlStxZPf7aJNFg==
+"@segment/analytics-next@^1.31.2":
+  version "1.31.2"
+  resolved "https://registry.yarnpkg.com/@segment/analytics-next/-/analytics-next-1.31.2.tgz#10ca64999415c92391e72ec276fa3345805a372f"
+  integrity sha512-v1bJsYCNmaIYrz7X6kjhKeGXr3Dg2XtHPDux4bNq0b07EuNEIEcr0W2wvsB2LkIayls0RwKhFq4aoqKJ2gLh0w==
   dependencies:
     "@lukeed/uuid" "^2.0.0"
     "@segment/analytics.js-video-plugins" "^0.2.1"
