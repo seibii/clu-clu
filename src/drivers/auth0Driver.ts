@@ -32,10 +32,9 @@ export type Auth0Request =
   | Auth0CallbackRequest;
 
 export interface Auth0Source {
-  token$: Stream<string>;
+  token$: Stream<string | null>;
   login$: Stream<null>;
   logout$: Stream<null>;
-  requiredLogin$: Stream<null>;
   appState$: Stream<any>;
 }
 
@@ -45,6 +44,7 @@ export interface Props {
   redirectUrl: string;
   audience: string;
   useRefreshTokens: boolean;
+  errorReporter: (error: Error) => void;
 }
 
 export const makeAuth0Driver = (
@@ -63,7 +63,6 @@ export const makeAuth0Driver = (
       token$: Stream.createWithMemory(),
       login$: Stream.create(),
       logout$: Stream.create(),
-      requiredLogin$: Stream.createWithMemory(),
       appState$: Stream.create(),
     };
 
@@ -75,7 +74,10 @@ export const makeAuth0Driver = (
       .flatten()
       .addListener({
         next: (token) => source.token$.shamefullySendNext(token.__raw),
-        error: () => source.requiredLogin$.shamefullySendNext(null),
+        error: (err) => {
+          source.token$.shamefullySendNext(null);
+          props.errorReporter(err);
+        },
       });
 
     stream
@@ -88,7 +90,7 @@ export const makeAuth0Driver = (
       .flatten()
       .addListener({
         next: () => source.login$.shamefullySendNext(null),
-        // TODO: error: () => source.requiredLogin$.shamefullySendNext(null)
+        error: (err) => props.errorReporter(err),
       });
 
     stream
@@ -104,18 +106,20 @@ export const makeAuth0Driver = (
               : props.redirectUrl,
           });
           source.logout$.shamefullySendNext(null);
+          source.token$.shamefullySendNext(null);
         },
-        // TODO: error: () => source.requiredLogin$.shamefullySendNext(null)
       });
 
     stream
-      .filter((reauest) => reauest.type === "callback")
+      .filter((request) => request.type === "callback")
       .map(() => Stream.fromPromise(client.handleRedirectCallback()))
       .flatten()
       .addListener({
         next: (callback) =>
           source.appState$.shamefullySendNext(callback.appState),
-        error: () => source.requiredLogin$.shamefullySendNext(null),
+        error: (err) => {
+          props.errorReporter(err);
+        },
       });
 
     return source;
