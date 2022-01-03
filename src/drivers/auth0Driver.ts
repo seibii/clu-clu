@@ -75,7 +75,6 @@ export const makeAuth0Driver = (
       .addListener({
         next: (token: IdToken) => source.token$.shamefullySendNext(token.__raw),
         error: (err: any) => {
-          console.log("login error");
           source.token$.shamefullySendNext(null);
           if (err?.error !== "login_required") {
             props.errorReporter(err);
