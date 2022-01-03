@@ -1,4 +1,4 @@
-import { Auth0Client } from "@auth0/auth0-spa-js";
+import { Auth0Client, IdToken } from "@auth0/auth0-spa-js";
 import { Stream } from "xstream";
 
 export const emailConnection = "Username-Password-Authentication";
@@ -73,10 +73,13 @@ export const makeAuth0Driver = (
       .map(() => Stream.fromPromise(client.getIdTokenClaims()))
       .flatten()
       .addListener({
-        next: (token) => source.token$.shamefullySendNext(token.__raw),
-        error: (err) => {
+        next: (token: IdToken) => source.token$.shamefullySendNext(token.__raw),
+        error: (err: any) => {
+          console.log("login error");
           source.token$.shamefullySendNext(null);
-          props.errorReporter(err);
+          if (err?.error !== "login_required") {
+            props.errorReporter(err);
+          }
         },
       });
 
@@ -118,6 +121,7 @@ export const makeAuth0Driver = (
         next: (callback) =>
           source.appState$.shamefullySendNext(callback.appState),
         error: (err) => {
+          source.appState$.shamefullySendError(err);
           props.errorReporter(err);
         },
       });
