@@ -1,6 +1,6 @@
 {
   "name": "clu-clu",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "main": "lib/cjs/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
