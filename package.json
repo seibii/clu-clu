@@ -19,7 +19,7 @@
     "@cycle/state": "^1.6.0",
     "@cycle/storage": "^5.1.2",
     "@cycle/time": "^0.21.0",
-    "@segment/analytics-next": "^1.33.0",
+    "@segment/analytics-next": "^1.33.4",
     "@sentry/browser": "^6.17.3",
     "@sentry/tracing": "^6.17.3",
     "@sentry/webpack-plugin": "^1.18.4",
