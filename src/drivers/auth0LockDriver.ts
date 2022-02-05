@@ -34,6 +34,9 @@ export const makeAuth0LockDriver = (
           case "login":
             lock.show();
             break;
+          case "logout":
+            lock.logout({ returnTo: request.returnUri });
+            break;
         }
       },
     });
