@@ -3,7 +3,7 @@ import { Auth0Lock } from "auth0-lock";
 
 export interface Auth0LockLogoutRequest {
   type: "logout";
-  returnUri?: string;
+  returnUri: string;
 }
 
 export interface Auth0LockLoginRequest {
