@@ -11,3 +11,4 @@ export * from "./shaken";
 export * from "./storage";
 export * from "./location";
 export * from "./pageEvent";
+export * from "./lock";
