@@ -15,10 +15,15 @@ export interface Auth0LockTokenRequest {
   type: "token";
 }
 
+export interface Auth0LockHideRequest {
+  type: "hide";
+}
+
 export type Auth0LockRequest =
   | Auth0LockLoginRequest
   | Auth0LockLogoutRequest
-  | Auth0LockTokenRequest;
+  | Auth0LockTokenRequest
+  | Auth0LockHideRequest;
 
 interface Props {
   domain: string;
@@ -66,6 +71,11 @@ export const makeAuth0LockDriver = (
         (request): request is Auth0LockLoginRequest => request.type === "login"
       )
       .addListener({ next: (request) => lock.show(request.options) });
+    stream
+      .filter(
+        (request): request is Auth0LockLoginRequest => request.type === "hide"
+      )
+      .addListener({ next: (_) => lock.hide() });
     stream
       .filter((request) => request.type === "token")
       .addListener({
