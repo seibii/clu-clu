@@ -9,7 +9,7 @@ interface Sources {
 }
 
 export const loggedInAuthToken$ = (sources: Sources): Stream<string> =>
-  Stream.merge(sources.auth.token$, sources.lock.token$).filter(notEmpty);
+  sources.auth.token$.filter(notEmpty);
 
 export const loggedInAuthLockToken$ = (sources: Sources): Stream<string> =>
   sources.lock.token$.filter(notEmpty);
