@@ -8,6 +8,7 @@ export interface Auth0LockLogoutRequest {
 
 export interface Auth0LockLoginRequest {
   type: "login";
+  options?: Auth0LockShowOptions;
 }
 
 export interface Auth0LockTokenRequest {
@@ -18,6 +19,7 @@ export type Auth0LockRequest =
   | Auth0LockLoginRequest
   | Auth0LockLogoutRequest
   | Auth0LockTokenRequest;
+
 interface Props {
   domain: string;
   clientId: string;
@@ -26,8 +28,25 @@ interface Props {
   options?: Auth0LockConstructorOptions;
 }
 
+export interface Auth0SignEvent {
+  action: "signin" | "signup";
+  kind: string;
+}
+
+export interface Auth0ShowEvent {
+  action: "show";
+  kind: "signin" | "signup";
+}
+
+export interface Auth0OtherEvent {
+  action: "hide" | "authenticated";
+}
+
+export type Auth0Event = Auth0ShowEvent | Auth0SignEvent | Auth0OtherEvent;
+
 export interface Auth0LockSource {
   token$: Stream<string | null>;
+  event$: Stream<Auth0Event>;
 }
 
 export const makeAuth0LockDriver = (
@@ -37,12 +56,16 @@ export const makeAuth0LockDriver = (
 
   const source: Auth0LockSource = {
     token$: Stream.createWithMemory(),
+    event$: Stream.create(),
   };
+  setLockEventListener(lock, source);
 
   return (stream): Auth0LockSource => {
     stream
-      .filter((request) => request.type === "login")
-      .addListener({ next: () => lock.show() });
+      .filter(
+        (request): request is Auth0LockLoginRequest => request.type === "login"
+      )
+      .addListener({ next: (request) => lock.show(request.options) });
     stream
       .filter((request) => request.type === "token")
       .addListener({
@@ -62,4 +85,31 @@ export const makeAuth0LockDriver = (
 
     return source;
   };
+};
+
+const setLockEventListener = (lock: Auth0LockCore, source: Auth0LockSource) => {
+  lock.on("hide", () => {
+    source.event$.shamefullySendNext({ action: "hide" });
+  });
+  lock.on("signin ready", () => {
+    source.event$.shamefullySendNext({ action: "show", kind: "signin" });
+  });
+  lock.on("signup ready", () => {
+    source.event$.shamefullySendNext({ action: "show", kind: "signup" });
+  });
+  lock.on("signin submit", () => {
+    source.event$.shamefullySendNext({ action: "signin", kind: "email" });
+  });
+  lock.on("signup submit", () => {
+    source.event$.shamefullySendNext({ action: "signup", kind: "email" });
+  });
+  lock.on("federated login", (result) => {
+    source.event$.shamefullySendNext({
+      action: result.action,
+      kind: result.name,
+    });
+  });
+  lock.on("authenticated", () => {
+    source.event$.shamefullySendNext({ action: "authenticated" });
+  });
 };
