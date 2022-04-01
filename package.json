@@ -16,7 +16,7 @@
     "@cycle/http": "^15.4.0",
     "@cycle/isolate": "^5.2.0",
     "@cycle/run": "^5.7.0",
-    "@cycle/state": "^1.6.0",
+    "@cycle/state": "^1.7.0",
     "@cycle/storage": "^5.1.2",
     "@cycle/time": "^0.21.0",
     "@segment/analytics-next": "^1.33.5",
