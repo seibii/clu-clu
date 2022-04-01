@@ -1029,10 +1029,10 @@
   resolved "https://registry.yarnpkg.com/@types/auth0-js/-/auth0-js-9.14.5.tgz#f1f51677e8495a56a8052bd094db1efd08361a48"
   integrity sha512-ZIHdtQ6Fkn7C+qAECtiP/+igb/vd0b+lOw018c+xEW2QDQFLSnDjtQAPLkdZopOsVdiXdC4JMS5w8ZHQfRGHtw==
 
-"@types/auth0-lock@^11.27.3":
-  version "11.27.3"
-  resolved "https://registry.yarnpkg.com/@types/auth0-lock/-/auth0-lock-11.27.3.tgz#244bbefea98a28b491b738d76898340a9f436bf3"
-  integrity sha512-iJO2Hhls9ITDaocGxBpTWBWyBssXJ8vaMEu0Pf3VArHSJxNiu1CGw2n5Ic7oNgSz71VCx0AQbQm15/k5cyklsA==
+"@types/auth0-lock@^11.27.4":
+  version "11.27.4"
+  resolved "https://registry.yarnpkg.com/@types/auth0-lock/-/auth0-lock-11.27.4.tgz#da8476e5346ee5bbed2f4dad1cacd4270771929d"
+  integrity sha512-yT1CNqXATr6UQh/a7+jNjnfAu1cww0eLxpyJn4UdByAz0SliYWUr+c/N3AC65591aX9R4Q122fHwlnQZADYJOA==
   dependencies:
     "@types/auth0-js" "*"
 

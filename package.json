@@ -41,7 +41,7 @@
     "xstream": "^11.7.0"
   },
   "devDependencies": {
-    "@types/auth0-lock": "^11.27.3",
+    "@types/auth0-lock": "^11.27.4",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
