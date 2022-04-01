@@ -23,7 +23,7 @@
     "@sentry/browser": "^6.19.3",
     "@sentry/tracing": "^6.19.3",
     "@sentry/webpack-plugin": "^1.18.8",
-    "@types/gtag.js": "^0.0.8",
+    "@types/gtag.js": "^0.0.10",
     "@types/jest": "^27.4.1",
     "auth0-lock": "^11.32.2",
     "camelcase-keys": "^7.0.2",
