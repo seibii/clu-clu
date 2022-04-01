@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@auth0/auth0-spa-js@^1.20.0":
-  version "1.20.0"
-  resolved "https://registry.yarnpkg.com/@auth0/auth0-spa-js/-/auth0-spa-js-1.20.0.tgz#0fbb47b518e74877cc519cd51fbfa50fad18a2a3"
-  integrity sha512-TSQn8UJKRwamWCxUFbWqXQICWhrBF7vPg5Y/DrziFoDAzfUn6jIl7bv1xb3VMml6xwkCvMaHY4IE48LzwNUjUg==
+"@auth0/auth0-spa-js@^1.20.1":
+  version "1.20.1"
+  resolved "https://registry.yarnpkg.com/@auth0/auth0-spa-js/-/auth0-spa-js-1.20.1.tgz#8e49e76f0a8f5153595489a1399c980738609a65"
+  integrity sha512-hJyZ1n/7K0srArsnR9RKViGKh550SBE7nNB4g0F0X9H3VWCbETlCDWgnRckrhy045Bmb10VVcDBes3uImWTnjw==
   dependencies:
     abortcontroller-polyfill "^1.7.3"
     browser-tabs-lock "^1.2.15"
