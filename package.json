@@ -33,7 +33,7 @@
     "libphonenumber-js": "^1.9.50",
     "shaken-qr-reader": "^1.1.4",
     "snabbdom-looks-like": "git+https://github.com/seibii/snabbdom-looks-like",
-    "snakecase-keys": "^5.1.2",
+    "snakecase-keys": "^5.4.1",
     "switch-path": "git+https://github.com/seibii/switch-path.git#44fca145009cb2f6bee4192f95927bc6f67da61b",
     "ts-loader": "^9.2.8",
     "ts-node": "^9.1.1",
