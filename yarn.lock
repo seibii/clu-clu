@@ -1297,16 +1297,16 @@ auth0-js@^9.19.0:
     url-join "^4.0.1"
     winchan "^0.2.2"
 
-auth0-lock@^11.32.2:
-  version "11.32.2"
-  resolved "https://registry.yarnpkg.com/auth0-lock/-/auth0-lock-11.32.2.tgz#34bf5326ef8e57f6863e7adee368425aff5ca531"
-  integrity sha512-UqHUgzSBuPLx0b7j7IK/RFlyUbUly0aStIAzmdr56ul0wJJjTny6YN8JyIj0Tb6Bj82wdpGW92G22rNqo53/og==
+auth0-lock@^11.33.0:
+  version "11.33.0"
+  resolved "https://registry.yarnpkg.com/auth0-lock/-/auth0-lock-11.33.0.tgz#b62a360ec7044b9b2c941732146fc554a6204223"
+  integrity sha512-shtrd1RMiSl8V64gwVX7sNlysFZdJZxJ7GrA99W9I3YIqjbPuJS0ms0xxwUJxF1DclpgIsBvM/KEtk1xABtMHg==
   dependencies:
     auth0-js "^9.19.0"
     auth0-password-policies "^1.0.2"
     blueimp-md5 "^2.19.0"
     classnames "^2.3.1"
-    dompurify "^2.3.4"
+    dompurify "^2.3.5"
     immutable "^3.7.3"
     jsonp "^0.2.1"
     node-fetch "^2.6.7"
@@ -1652,10 +1652,10 @@ dom-helpers@^3.4.0:
   dependencies:
     "@babel/runtime" "^7.1.2"
 
-dompurify@^2.3.4:
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.3.5.tgz#c83ed5a3ae5ce23e52efe654ea052ffb358dd7e3"
-  integrity sha512-kD+f8qEaa42+mjdOpKeztu9Mfx5bv9gVLO6K9jRx4uGvh6Wv06Srn4jr1wPNY2OOUGGSKHNFN+A8MA3v0E0QAQ==
+dompurify@^2.3.5:
+  version "2.3.8"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.3.8.tgz#224fe9ae57d7ebd9a1ae1ac18c1c1ca3f532226f"
+  integrity sha512-eVhaWoVibIzqdGYjwsBWodIQIaXFSB+cKDf4cfxLMsK0xiud6SE+/WCVx/Xw/UwQsa4cS3T2eITcdtmTg2UKcw==
 
 dot-case@^3.0.4:
   version "3.0.4"
