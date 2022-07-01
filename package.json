@@ -10,7 +10,7 @@
     "lint:fix": "eslint --fix './{src,test}/**/*.{ts,tsx}' && prettier --write './{src,test}/**/*.{ts,tsx}'"
   },
   "dependencies": {
-    "@auth0/auth0-spa-js": "^1.22.0",
+    "@auth0/auth0-spa-js": "^1.22.1",
     "@cycle/dom": "^23.1.0",
     "@cycle/history": "7.1.0 DON'T UPDATE until https://github.com/cyclejs/cyclejs/pull/943 is merged",
     "@cycle/http": "^15.4.0",
