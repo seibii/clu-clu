@@ -30,7 +30,7 @@
     "cyclejs-test-helpers": "git+https://github.com/seibii/cyclejs-test-helpers",
     "cyclejs-utils": "^4.0.2",
     "cyclic-router": "^6.0.0",
-    "libphonenumber-js": "^1.10.6",
+    "libphonenumber-js": "^1.10.7",
     "shaken-qr-reader": "^1.1.4",
     "snabbdom-looks-like": "git+https://github.com/seibii/snabbdom-looks-like",
     "snakecase-keys": "^5.4.2",
