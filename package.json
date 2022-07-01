@@ -20,7 +20,7 @@
     "@cycle/storage": "^5.1.2",
     "@cycle/time": "^0.21.0",
     "@segment/analytics-next": "^1.38.0",
-    "@sentry/browser": "^6.19.7",
+    "@sentry/browser": "^7.3.1",
     "@sentry/tracing": "^7.0.0",
     "@sentry/webpack-plugin": "^1.18.9",
     "@types/gtag.js": "^0.0.10",
